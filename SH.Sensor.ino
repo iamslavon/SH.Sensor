@@ -8,10 +8,10 @@
 DHT dht(DHTPIN, DHTTYPE);
 WiFiServer server(80);
 
-const char* ssid = "Ministry of Pies";
-const char* password = "ilovethisplace";
-const String host = "37.57.107.136";
-const String postUrl = "http://37.57.107.136/data/set";
+const char* ssid = "your ssid";
+const char* password = "wifi pass";
+const String host = "0.0.0.0";
+const String postUrl = "http://urlToApi";
 IPAddress ip(192, 168, 1, 50);
 IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
