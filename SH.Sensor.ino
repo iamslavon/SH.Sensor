@@ -53,7 +53,11 @@ void loop() {
 			data = ReadDht();
 		} while (data.Humidity > 100 || data.Temperature > 100);
 		
-		PostDhtData(data);
+    String response = ComposeJsonForDht(data);
+    client.println("HTTP/1.1 200 OK");
+    client.println("Content-Type: application/json");
+    client.println();
+    client.print(response);
 	}
 	else {
 		Serial.println("invalid request");
@@ -79,17 +83,6 @@ void ConnectToWifi() {
 	Serial.println("WiFi connected");
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
-}
-
-void PostDhtData(Dht22 data) {
-	String json = ComposeJsonForDht(data);
-
-	HTTPClient http;
-	http.begin(postUrl);
-	http.addHeader("Host", host);
-	http.addHeader("Content-Type", "application/json");
-	http.POST(json);
-	http.end();
 }
 
 String CreateJson(int houseId, int roomId, int sensorId, int value) {
