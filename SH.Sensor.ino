@@ -85,12 +85,8 @@ void ConnectToWifi() {
 	Serial.println(WiFi.localIP());
 }
 
-String CreateJson(int houseId, int roomId, int sensorId, int value) {
-	String json = "{HouseId: ";
-	json += houseId;
-	json += ", RoomId: ";
-	json += roomId;
-	json += ", SensorId: ";
+String CreateJson(int sensorId, int value) {
+	String json = "{SensorId: ";
 	json += sensorId;
 	json += ", Value: ";
 	json += value;
@@ -101,9 +97,9 @@ String CreateJson(int houseId, int roomId, int sensorId, int value) {
 
 String ComposeJsonForDht(Dht22 data) {
 	String json = "[";
-	json += CreateJson(houseId, roomId, huminitySensorId, data.Humidity);
+	json += CreateJson(huminitySensorId, data.Humidity);
 	json += ", ";
-	json += CreateJson(houseId, roomId, temperatureSensorId, data.Temperature);
+	json += CreateJson(temperatureSensorId, data.Temperature);
 	json += "]";
 
 	return json;
